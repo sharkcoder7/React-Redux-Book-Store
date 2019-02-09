@@ -40,6 +40,7 @@ class EditModal extends Component {
     const modifiedBook = {
       // id: uuid(),
       _id: this.props._id,
+      id: this.props.id,
       name: this.state.name,
       author: this.state.author,
       category: this.state.category,
@@ -48,8 +49,9 @@ class EditModal extends Component {
       total_pages: this.state.total_pages
     }
 
+    console.log(modifiedBook);
+
     // Edit book via updateBook action:
-    // this.props.addBook(newBook);
     this.props.updateBook(modifiedBook);
 
     // Close modal:
@@ -146,14 +148,26 @@ class EditModal extends Component {
         {/*EDIT BUTTON*/}
         <Button
           className="edit-button"
-          color="medium"
           size="sm"
           onClick={() => {
               this.setState({modal_form: "Edit"});
               this.toggle();
           }}
         >
-          &#x270E;
+          Edit
+        </Button>
+
+        {/*PROGRESS BUTTON*/}
+        <Button
+          className="update-progress-button"
+          color="primary"
+          size="sm"
+          onClick={() => {
+              this.setState({modal_form: "Progress"});
+              this.toggle();
+          }}
+        >
+          Update Progress
         </Button>
 
         <Modal
@@ -169,20 +183,6 @@ class EditModal extends Component {
             </Form>
           </ModalBody>
         </Modal>
-
-
-        {/*PROGRESS BUTTON*/}
-        <Button
-          className="update-progress-button"
-          color="primary"
-          size="sm"
-          onClick={() => {
-              this.setState({modal_form: "Progress"});
-              this.toggle();
-          }}
-        >
-          Update Progress
-        </Button>
 
       </div>
     );
