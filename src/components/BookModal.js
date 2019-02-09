@@ -16,7 +16,9 @@ import uuid from 'uuid';
 class BookModal extends Component {
   state = {
     modal: false,
-    name: ''
+    name: '',
+    author: '',
+    category: 'Action'
   }
 
   toggle = () => {
@@ -85,12 +87,13 @@ class BookModal extends Component {
                 />
                 <Label for="category">Category:</Label>
                 <Input
-                  type="text"
+                  type="select"
                   name="category"
                   id="category"
-                  placeholder="Example: Romance, Horror, etc."
                   onChange={this.onChange}
-                />
+                >
+                {this.props.categories.map(cat => <option key={cat} value={cat} selected={this.state.category == cat ? true : false}>{cat}</option>)}
+                </Input>
                 <Button
                   color="dark"
                   style={{marginTop: '2rem'}}
