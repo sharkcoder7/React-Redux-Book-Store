@@ -3,10 +3,8 @@ import {
   Collapse,
   Navbar,
   NavbarToggler,
-  NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
   Container
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
@@ -14,6 +12,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from '../actions/authActions';
+import { clearBooks } from '../actions/bookActions';
 
 class AppNavbar extends Component {
   state = {
@@ -28,6 +27,7 @@ class AppNavbar extends Component {
 
   onLogoutClick(e) {
     e.preventDefault();
+    this.props.clearBooks();
     this.props.logoutUser();
   }
 
@@ -36,16 +36,22 @@ class AppNavbar extends Component {
     const { isAuthenticated, user } = this.props.auth;
 
     const authLinks = (
-      <Nav className="ml-auto" navbar>
+      <Nav className="ml-auto auth-links" navbar>
         <NavItem>
-          <p className="nav-link">
-            <img src='./user-avatar.png' height='30' style={{display: "inline; marginRight: 10px"}} alt="avatar"/>
-            Hi {user.name}!</p>
+          <p className="nav-link username">
+            <img
+              className="avatar"
+              src='./user-avatar.png'
+              height='30'
+              style={{display: "inline", marginRight: "15px"}} alt="avatar"
+            />
+            <strong>Hello {user.name}!</strong>
+          </p>
         </NavItem>
         <NavItem>
           <a
             href=""
-            onClick={this.onLogoutClick.bind(this)} className="nav-link"
+            onClick={this.onLogoutClick.bind(this)} className="nav-link logout-link"
           >
             Log Out
           </a>
@@ -90,4 +96,4 @@ const mapStateToProps = (state) => ({
 });
 
 
-export default connect(mapStateToProps, { logoutUser }) (AppNavbar);
+export default connect(mapStateToProps, { logoutUser, clearBooks }) (AppNavbar);

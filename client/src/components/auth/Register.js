@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
 import { connect } from 'react-redux';
 import { registerUser } from '../../actions/authActions'
-// import TextFieldGroup from '../'
 
 class Register extends Component {
   constructor() {
@@ -19,6 +18,13 @@ class Register extends Component {
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    if(this.props.auth.isAuthenticated) {
+      // if loged in, redirect to home / books:
+      this.props.history.push('/');
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -44,7 +50,6 @@ class Register extends Component {
       password2: this.state.password2,
     }
 
-    // console.log(newUser);
     this.props.registerUser(newUser, this.props.history);
   }
 

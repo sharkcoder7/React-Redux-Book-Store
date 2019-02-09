@@ -1,17 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 class ProgressCircle extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
 
   render() {
     // Size of the enclosing square
     const sqSize = this.props.sqSize;
-    // const sqSize = 100;
     // SVG centers the stroke width on the radius, subtract out so circle fits in square
     const radius = (this.props.sqSize - this.props.strokeWidth) / 2;
-    // const radius = (100 - this.props.strokeWidth) / 2;
     // Enclose cicle in a circumscribing square
     const viewBox = `0 0 ${sqSize} ${sqSize}`;
     // Arc length at 100% coverage is the circle circumference
@@ -42,17 +38,15 @@ class ProgressCircle extends React.Component {
               strokeDasharray: dashArray,
               strokeDashoffset: dashOffset
             }} />
-          {/*}<text
-            className="circle-text"
-            x="50%"
-            y="50%"
-            dy=".3em"
-            textAnchor="middle">
-            {`${this.props.percentage}%`}
-          </text>*/}
       </svg>
     );
   }
+}
+
+ProgressCircle.propTypes = {
+  strokeWidth: PropTypes.string.isRequired,
+  sqSize: PropTypes.string.isRequired,
+  percentage: PropTypes.number.isRequired
 }
 
 export default ProgressCircle
