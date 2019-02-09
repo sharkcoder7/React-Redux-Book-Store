@@ -1,27 +1,44 @@
 import React, { Component } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import AppNavbar from './AppNavbar';
-// import './App.css';
-// import Footer from './Footer';
-// import AddTodo from '../containers/AddTodo';
-// import VisibleTodoList from '../containers/VisibleTodoList';
+import BookList from './BookList';
+import BookModal from './BookModal';
+import { Container } from 'reactstrap';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <AppNavbar />
-        <h1>Book Store</h1>
-      </div>
-    );
-  }
-}
-// const App = () => (
-//   <div>
-//     <AddTodo />
-//     <VisibleTodoList />
-//     <Footer />
-//   </div>
-// );
+import { Provider } from 'react-redux';
+import store from '../store';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../App.css';
+
+const App = () => {
+  return (
+      <Provider store={store}>
+        <div className="App">
+          <AppNavbar />
+          <Container>
+            <BookModal />
+            <BookList />
+          </Container>
+        </div>
+      </Provider>
+  );
+};
+
+// class App extends Component {
+//   render() {
+//     return (
+//       <Provider store={store}>
+//         <div className="App">
+//           <AppNavbar />
+//           <Container>
+//           <BookModal />
+//           <BookList />
+//         </Container>
+//         </div>
+//       </Provider>
+//     );
+//   }
+// }
+
 
 export default App;
