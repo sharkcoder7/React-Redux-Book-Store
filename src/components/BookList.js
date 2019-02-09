@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 
 import CategoryFilter from './CategoryFilter';
 import Book from './Book';
+import EditModal from './EditModal';
 
 class BookList extends Component {
 
@@ -28,22 +29,23 @@ class BookList extends Component {
     const { books } = this.props.library;
     const catFilter = this.props.catFilter.filter;
     return (
-      <Container>
-        <CategoryFilter categories={['All',...this.props.categories]} onChange={this.handleFilterChange}/>
+      <Container style={{marginBottom: "20px"}}>
+        <CategoryFilter categories={['All Categories',...this.props.categories]} onChange={this.handleFilterChange}/>
         <ListGroup>
           <TransitionGroup className="book-list">
             {books.filter(book => catFilter.includes(book.category)).map(({ id, name, author, category}) => (
               <CSSTransition key={id} timeout={500} classNames="fade">
                 <ListGroupItem>
-                  <Button
-                    className="remove-btn"
-                    color="danger"
-                    size="sm"
-                    onClick={() => this.onDeleteClick(id)}
-                  >
-                    &times;
-                  </Button>
                   <Book name={name} author={author} category={category} />
+                  <Button
+                  className="remove-btn"
+                  color="dark"
+                  size="sm"
+                  onClick={() => this.onDeleteClick(id)}
+                  >
+                  ⨉
+                  </Button>
+                  <EditModal categories={this.props.categories} id={id} name={name} author={author} category={category} />
                 </ListGroupItem>
               </CSSTransition>
             ))}
