@@ -1,7 +1,7 @@
 {
   "name": "redux-book-store",
   "version": "1.0.0",
-  "description": "MERN Full-Stack Book Library Project",
+  "description": "MERN Full-Stack Book Store Project",
   "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix client",
@@ -19,7 +19,6 @@
     "Redux",
     "Node"
   ],
-  "author": "Paul Rail and Kyle Lemon",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
